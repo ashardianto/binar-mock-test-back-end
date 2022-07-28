@@ -1,0 +1,200 @@
+swagger: "2.0"
+info:
+  title: Binar Challenge Chapter 8
+  description: API Documentation using swagger.
+  version: 1.0.0
+
+host: "localhost:3000"
+basePath: "/api"
+
+tags:
+- name: "App Control"
+  description: "Everything about app controller"
+
+schemes: 
+  - http
+  - https
+
+paths:
+  /auth/register:
+    post:
+      tags:
+      - "Auth User"
+      summary: "Create new user"
+      description: ""
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Player object that you want to get"
+        required: true
+        schema:
+          $ref: "#/definitions/createUser"
+      responses:
+        "200":
+          description: "Success"
+  /auth/login:
+    post:
+      tags:
+      - "Auth User"
+      summary: "User login"
+      description: ""
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Player object that you want to get"
+        required: true
+        schema:
+          $ref: "#/definitions/userLogin"
+      responses:
+        "200":
+          description: "Success"
+          
+  /products:
+    get:
+      tags:
+      - "Products"
+      summary: "get all products"
+      description: ""
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      responses:
+        "200":
+          description: "Success"
+          
+  /products/{productsId}:
+    get:
+      tags:
+      - "Products"
+      summary: "get products by id"
+      description: ""
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "path"
+        name: "productsId"
+        description: "Player object that you want to get"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        "200":
+          description: "Success"
+        "400":
+          description: "Products with the ID not found"
+          
+  /products/create:
+    post:
+      tags:
+      - "Products"
+      summary: "Create new product"
+      description: "Only Admin can do it"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Player object that you want to get"
+        required: true
+        schema:
+          $ref: "#/definitions/createProduct"
+      responses:
+        "200":
+          description: "Success"  
+          
+  /products/{productId}:
+    delete:
+      tags:
+      - "Products"
+      summary: "Delete product"
+      description: "Only Admin can do it"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "path"
+        name: "productId"
+        description: "Player object that you want to get"
+        required: true
+        type: "string"
+      responses:
+        "200":
+          description: "Success"    
+          
+  /products/{productId}:
+    put:
+      tags:
+      - "Products"
+      summary: "Update product"
+      description: "Only Admin can do it"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "path"
+        name: "productId"
+        description: "Player object that you want to get"
+        required: true
+        type: "string"
+      responses:
+        "200":
+          description: "Success"        
+
+definitions:
+
+  createUser:      
+    type: "object"
+    required:
+      - "username"
+      - "email"
+      - "password"
+    properties:
+      username:
+        type: "string"
+      email:
+        type: "string"
+      password:
+        type: "string"
+        
+  userLogin:      
+    type: "object"
+    required:
+      - "username"
+      - "password"
+    properties:
+      username:
+        type: "string"
+      password:
+        type: "string"
+        
+  createProduct:      
+    type: "object"
+    required:
+      - "title"
+      - "desc"
+      - "img"
+      - "price"
+    properties:
+      title:
+        type: "string"
+      desc:
+        type: "string"
+      img:
+        type: "string"      
+      price:
+        type: "number"      
